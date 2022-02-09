@@ -27,6 +27,7 @@ body {
   -webkit-font-smoothing: antialiased;
   height: 100%;
   position: relative;
+  background: #F0F2F5;
 }
 
 img,
