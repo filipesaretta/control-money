@@ -1,8 +1,8 @@
 import { Container } from './styles';
 
-import income from '../../assets/income.svg'
-import outcome from '../../assets/outcome.svg'
-import total from '../../assets/total.svg'
+import income from '../../assets/income.svg';
+import outcome from '../../assets/outcome.svg';
+import total from '../../assets/total.svg';
 
 export function Summary() {
   return (
@@ -12,22 +12,22 @@ export function Summary() {
           <p>Entradas</p>
           <img src={income} alt="Entradas" />
         </header>
-        <h2>R$ 33500,00</h2>
+        <h2>R$ 33.500,00</h2>
       </div>
       <div>
         <header>
           <p>Saídas</p>
           <img src={outcome} alt="Saídas" />
         </header>
-        <h2>R$ -3500,00</h2>
+        <h2>R$ -3.500,00</h2>
       </div>
       <div>
         <header>
           <p>Total</p>
           <img src={total} alt="Total" />
         </header>
-        <h2>R$ 30000,00</h2>
+        <h2>R$ 30.000,00</h2>
       </div>
     </Container>
-  )
+  );
 }
