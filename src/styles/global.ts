@@ -1,7 +1,38 @@
 import { createGlobalStyle } from 'styled-components';
 
-
 export const GlobalStyle = createGlobalStyle`
+
+
+.react-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.react-modal-content {
+  width: 100%;
+  max-width: 576px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 5rem 4.8rem;
+  border-radius: 1rem;
+  
+  .close-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 1.5rem;
+    top: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 0;
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -89,4 +120,4 @@ h6 {
   isolation: isolate;
 }
 
-`
+`;
