@@ -1,99 +1,96 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import Modal from 'react-modal';
 import { FormEvent, useState } from 'react';
+import { Button, Container, RadioBox, SelectTypeOfTransaction } from './styles';
 import close from '../../assets/close.svg';
 import income from '../../assets/income.svg';
 import outcome from '../../assets/outcome.svg';
 import { api } from '../../services/api';
-import {
-  Container,
-  Button,
-  DialogContent,
-  Overlay,
-  SelectTypeOfTransaction,
-  RadioBox,
-} from './styles';
 
-export function NewTransactionModal() {
-  const [title, setTitle] = useState('');
-  const [value, setValue] = useState(0);
-  const [category, setCategory] = useState('');
+interface newTransactionModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+}
+
+export function NewTransactionModal({
+  isOpen,
+  onRequestClose,
+}: newTransactionModalProps) {
   const [type, setType] = useState('deposit');
 
-  function handleNewTransactionSubmit(e: FormEvent) {
+  const [title, setTitle] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [category, setCategory] = useState('');
+
+  function handleCreateNewTransaction(e: FormEvent) {
     e.preventDefault();
+
     const data = {
       title,
-      value,
+      amount,
       category,
       type,
     };
+
     api.post('/transactions', data);
   }
 
   return (
-    <Container>
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <Button>Nova transação</Button>
-        </Dialog.Trigger>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      overlayClassName="react-modal-overlay"
+      className="react-modal-content"
+    >
+      <button type="button" className="close-button" onClick={onRequestClose}>
+        <img src={close} alt="Close modal" />
+      </button>
 
-        <Overlay>
-          <DialogContent>
-            <Dialog.Close className="close-button">
-              <img src={close} alt="Close modal" />
-            </Dialog.Close>
-            <Dialog.Title className="title">Cadastrar transação</Dialog.Title>
-            <form onSubmit={handleNewTransactionSubmit}>
-              <input
-                type="text"
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <input
-                type="number"
-                placeholder="Preço"
-                value={value}
-                onChange={(e) => setValue(Number(e.target.value))}
-              />
-              <SelectTypeOfTransaction>
-                <RadioBox
-                  type="button"
-                  onClick={() => {
-                    setType('deposit');
-                  }}
-                  isActive={type === 'deposit'}
-                  activeColor="green"
-                >
-                  <img src={income} alt="Entradas de dinheiro" />
-                  <span>Income</span>
-                </RadioBox>
-                <RadioBox
-                  type="button"
-                  onClick={() => {
-                    setType('withdraw');
-                  }}
-                  isActive={type === 'withdraw'}
-                  activeColor="red"
-                >
-                  <img src={outcome} alt="Saídas de dinheiro" />
-                  <span>Outcome</span>
-                </RadioBox>
-              </SelectTypeOfTransaction>
-              <input
-                type="text"
-                placeholder="Categoria"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
+      <h2 className="title">Cadastrar Transação</h2>
+      <Container onSubmit={handleCreateNewTransaction}>
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Preço"
+          value={amount}
+          onChange={(event) => setAmount(Number(event.target.value))}
+        />
+        <SelectTypeOfTransaction>
+          <RadioBox
+            isActive={type === 'deposit'}
+            type="button"
+            activeColor="green"
+            onClick={() => setType('deposit')}
+          >
+            <img src={income} alt="Entradas de dinheiro" />
+            <span>Income</span>
+          </RadioBox>
+          <RadioBox
+            isActive={type === 'withdraw'}
+            type="button"
+            activeColor="red"
+            onClick={() => setType('withdraw')}
+          >
+            <img src={outcome} alt="Saídas de dinheiro" />
+            <span>Outcome</span>
+          </RadioBox>
+        </SelectTypeOfTransaction>
+        <input
+          type="text"
+          placeholder="Categoria"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        />
 
-              <button type="submit" className="submit-button">
-                Cadastrar
-              </button>
-            </form>
-          </DialogContent>
-        </Overlay>
-      </Dialog.Root>
-    </Container>
+        <Button type="submit" className="submit-button">
+          Cadastrar
+        </Button>
+      </Container>
+    </Modal>
   );
 }
+Modal.setAppElement('#root');
