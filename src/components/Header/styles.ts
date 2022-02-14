@@ -13,3 +13,18 @@ export const Content = styled.div`
   align-items: center;
   padding-top: 3.2rem;
 `;
+
+export const Button = styled.button`
+  margin-left: auto;
+  max-width: 19.5rem;
+  padding: 1.2rem 3.2rem;
+  background-color: #6933ff;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: white;
+  transition: filter 100ms ease-in-out;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+`;
