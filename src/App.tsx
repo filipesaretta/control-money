@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Dashboard } from './components/Dashboard';
 import { Header } from './components/Header';
 import { NewTransactionModal } from './components/NewTransactionModal';
+import { TransactionsProvider } from './hooks/useTransactions';
 import { GlobalStyle } from './styles/global';
 
 createServer({
@@ -15,8 +16,8 @@ createServer({
       transactions: {
         id: 1,
         title: 'Exemplo',
-        value: 1000,
-        category: 'Hello',
+        amount: 100000,
+        category: 'Exemplo',
         type: 'deposit',
         createdAt: new Date('2021-02-12 09:00:00'),
       },
@@ -46,7 +47,7 @@ function App() {
     setIsNewTransactionModalOpen(false);
   }
   return (
-    <>
+    <TransactionsProvider>
       <GlobalStyle />
       <Header onOpenNewTransactionalModal={handleOpenTransactionModal} />
       <NewTransactionModal
@@ -54,7 +55,7 @@ function App() {
         onRequestClose={handleCloseTransactionModal}
       />
       <Dashboard />
-    </>
+    </TransactionsProvider>
   );
 }
 
