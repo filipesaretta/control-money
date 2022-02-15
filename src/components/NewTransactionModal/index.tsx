@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { FormEvent, useState, useContext } from 'react';
+import { FormEvent, useState } from 'react';
 
 import close from '../../assets/close.svg';
 import income from '../../assets/income.svg';
@@ -64,7 +64,6 @@ export function NewTransactionModal({
         />
         <input
           type="number"
-          placeholder="Preço"
           required
           value={amount}
           onChange={(event) => setAmount(Number(event.target.value))}
