@@ -58,12 +58,14 @@ export function NewTransactionModal({
         <input
           type="text"
           placeholder="Title"
+          required
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
         <input
           type="number"
           placeholder="Preço"
+          required
           value={amount}
           onChange={(event) => setAmount(Number(event.target.value))}
         />
@@ -89,6 +91,7 @@ export function NewTransactionModal({
         </SelectTypeOfTransaction>
         <input
           type="text"
+          required
           placeholder="Categoria"
           value={category}
           onChange={(event) => setCategory(event.target.value)}
