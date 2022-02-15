@@ -22,6 +22,9 @@ export const Container = styled.div`
       font-size: 3.6rem;
       font-weight: 500;
       margin-top: 1.4rem;
+      &.withdraw {
+        color: #e52e4d;
+      }
     }
 
     &:last-child {

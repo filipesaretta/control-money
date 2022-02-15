@@ -40,7 +40,7 @@ export function Summary() {
           <p>Saídas</p>
           <img src={outcome} alt="Saídas" />
         </header>
-        <h2>-{MoneyFormat(summary.withdraws)}</h2>
+        <h2 className="withdraw">-{MoneyFormat(summary.withdraws)}</h2>
       </div>
       <div>
         <header>
