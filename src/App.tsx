@@ -1,10 +1,10 @@
-import { createServer, Model } from 'miragejs';
-import { useState } from 'react';
-import { Dashboard } from './components/Dashboard';
-import { Header } from './components/Header';
-import { NewTransactionModal } from './components/NewTransactionModal';
-import { TransactionsProvider } from './hooks/useTransactions';
-import { GlobalStyle } from './styles/global';
+import { createServer, Model } from "miragejs";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Loading from "./components/loading/Loading";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 createServer({
   models: {
@@ -12,38 +12,29 @@ createServer({
   },
 
   routes() {
-    this.namespace = 'api';
+    this.namespace = "api";
 
-    this.get('/transactions', () => this.schema.all('transaction'));
+    this.get("/transactions", () => this.schema.all("transaction"));
 
-    this.post('/transactions', (schema, req) => {
+    this.post("/transactions", (schema, req) => {
       const data = JSON.parse(req.requestBody);
 
-      return schema.create('transaction', data);
+      return schema.create("transaction", data);
     });
   },
 });
 
 function App() {
-  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
-    useState(false);
-  function handleOpenTransactionModal() {
-    setIsNewTransactionModalOpen(true);
-  }
-
-  function handleCloseTransactionModal() {
-    setIsNewTransactionModalOpen(false);
-  }
   return (
-    <TransactionsProvider>
-      <GlobalStyle />
-      <Header onOpenNewTransactionalModal={handleOpenTransactionModal} />
-      <NewTransactionModal
-        isOpen={isNewTransactionModalOpen}
-        onRequestClose={handleCloseTransactionModal}
-      />
-      <Dashboard />
-    </TransactionsProvider>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+      <Loading />
+    </>
   );
 }
 

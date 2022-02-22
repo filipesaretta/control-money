@@ -1,7 +1,7 @@
-import { useTransactions } from '../../hooks/useTransactions';
-import { MoneyFormat } from '../MoneyFormat';
+import { useTransactions } from "../../hooks/useTransactions";
+import { MoneyFormat } from "../MoneyFormat";
 
-import { Container } from './styles';
+import { Container } from "./styles";
 
 export function TransactionList() {
   const { transactions } = useTransactions();
@@ -22,13 +22,13 @@ export function TransactionList() {
             <tr key={transaction.id}>
               <td className="title">{transaction.title}</td>
               <td className={transaction.type}>
-                {transaction.type === 'withdraw'
+                {transaction.type === "withdraw"
                   ? `- ${MoneyFormat(transaction.amount)}`
                   : MoneyFormat(transaction.amount)}
               </td>
               <td>{transaction.category}</td>
               <td>
-                {new Intl.DateTimeFormat('pt-BR', {}).format(
+                {new Intl.DateTimeFormat("pt-BR", {}).format(
                   new Date(transaction.createdAt)
                 )}
               </td>
