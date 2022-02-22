@@ -1,5 +1,8 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { loadingStore } from "../../stores/loadingStore";
+import { userStore } from "../../stores/userStore";
+import { useNavigate } from "react-router-dom";
+
 import "./login.css";
 
 export default function Login() {
@@ -8,6 +11,8 @@ export default function Login() {
     password: "",
   });
   const [error, setError] = useState<string>();
+  let navigate = useNavigate();
+  const user = userStore((state: any) => state.user);
 
   //on input change
   const onInputChange = useCallback(
@@ -30,15 +35,31 @@ export default function Login() {
         loadingStore.setState((state) => {
           state.isVisible = true;
         });
+        //Fake api call (TODO implement a real one)
+        setTimeout(() => {
+          loadingStore.setState((state) => {
+            state.isVisible = false;
+          });
+          userStore.setState((state: any) => {
+            state.user = {
+              name: "Admin",
+              isLogged: true,
+            };
+          });
+        }, 2000);
       }
     },
     [credentials, setError]
   );
 
+  useEffect(() => {
+    if (user && user.isLogged) navigate("/");
+  }, [user]);
+
   return (
     <div className="d-flex align-items-center vh-100 p-2" id="login">
       <form
-        className="mx-auto bg-white p-4 rounded"
+        className="mx-auto bg-white p-4 rounded animate__animated animate__fadeInDown"
         onSubmit={(e) => onSubmit(e)}
       >
         <h1>Login</h1>
