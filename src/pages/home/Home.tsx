@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (!user || !user.isLogged) navigate("/login");
+    //if (!user || !user.isLogged) navigate("/login");
   }, [user]);
 
   return (

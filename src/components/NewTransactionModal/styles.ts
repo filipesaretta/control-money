@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.form`
   display: grid;
@@ -40,12 +40,12 @@ export const SelectTypeOfTransaction = styled.div`
 
 interface PropsRadioBox {
   isActive: boolean;
-  activeColor: 'green' | 'red';
+  activeColor: "green" | "red";
 }
 // It's to be able to change colors base on active colors setup with styled components
 const colors = {
-  green: 'rgba(51, 204, 149, .5)',
-  red: 'rgba(229, 46, 77, .5)',
+  green: "rgba(51, 204, 149, .5)",
+  red: "rgba(229, 46, 77, .5)",
 };
 
 export const RadioBox = styled.button<PropsRadioBox>`
@@ -57,7 +57,7 @@ export const RadioBox = styled.button<PropsRadioBox>`
   padding: 1.3rem;
   // This is a feature of styled components
   background-color: ${(props) =>
-    props.isActive ? colors[props.activeColor] : 'transparent'};
+    props.isActive ? colors[props.activeColor] : "transparent"};
   img {
     width: 25px;
     height: 25px;
