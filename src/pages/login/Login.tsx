@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { loadingStore } from "../../stores/loadingStore";
 import "./login.css";
 
 export default function Login() {
@@ -25,7 +26,11 @@ export default function Login() {
       setError("");
       if (credentials.username !== "admin" || credentials.password !== "admin")
         setError("Username o password errati!");
-      else console.log("IN");
+      else {
+        loadingStore.setState((state) => {
+          state.isVisible = true;
+        });
+      }
     },
     [credentials, setError]
   );

@@ -2,6 +2,7 @@ import { createServer, Model } from "miragejs";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
+import Loading from "./components/loading/Loading";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -25,12 +26,15 @@ createServer({
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+      <Loading />
+    </>
   );
 }
 
