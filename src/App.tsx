@@ -1,6 +1,9 @@
 import { createServer, Model } from "miragejs";
-import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 createServer({
   models: {
@@ -24,6 +27,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </Router>
