@@ -35,6 +35,6 @@
     "miragejs": "^0.1.43",
     "prettier": "^2.5.1",
     "typescript": "^4.5.5",
-    "vite": "^2.8.1"
+    "vite": "^2.9.13"
   }
 }
